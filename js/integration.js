@@ -1,35 +1,3 @@
-# GunStreamer
-Streaming component for Gun db. This is only the streaming part. The viewer part is a different component. For now it will be published to the root of Gun. To verify that it is publishing you can view currently view it at: https://gunmeeting.herokuapp.com/
-
-# Integration
-For an example use the index.html and the .js folder. 
-
-### HTML
-```html
-<head>
-...
-  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-  <script type="text/javascript" src="js/GunRecorder.js"></script>
-  <script type="text/javascript" src="js/GunStreamer.js"></script>
- ... 
-</head>
-```
-
-```html
-<body>
-...
-  <button type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-  <button id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
-  <br><br>
-  <video id="record_video" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay controls muted />
-  <script type="text/javascript" src="js/initialiation.js"></script>
- ...
-</body>
-```
-
-### initialiation.js
-The gun part, writing to gun and publish it.
-```javascript
 //Configure GUN to pass to streamer
 var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
 var opt = { peers: peers, localStorage: false, radisk: false };
@@ -42,9 +10,7 @@ var streamer_config = {
   gun: gunDB,//Gun instance
   debug: false//For debug logs
 }
-```
-The recorder part record parse and notify ondataavailable
-```javascript
+
 //GUN Streamer is the data side. It will convert data and write to GUN db
 const gunStreamer = new GunStreamer(streamer_config)
 
@@ -77,4 +43,3 @@ var recorder_config = {
 
 //Init the recorder
 const gunRecorder = new GunRecorder(recorder_config);
-```

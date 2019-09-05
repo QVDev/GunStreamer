@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script type="text/javascript" src="js/GunRecorder.js"></script>
+  <script type="text/javascript" src="js/GunStreamer.js"></script>
+</head>
+
+<body>
+  <button type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+  <button id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
+  <br><br>
+  <video id="record_video" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay controls muted />
+  <script type="text/javascript" src="js/integration.js"></script>
+</body>
+
+</html>
