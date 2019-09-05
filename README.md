@@ -1,8 +1,7 @@
 # GunStreamer
 Streaming component for Gun db. This is only the streaming part. The viewer part is a different component. For now it will be published to the root of Gun. To verify that it is publishing you can view currently view it at: https://gunmeeting.herokuapp.com/
 
-working example see https://qvdev.github.io/GunStreamer/
-
+[Working example]((https://qvdev.github.io/GunStreamer){:target="_blank"}
 # Integration
 For an example use the index.html and the .js folder. 
 
