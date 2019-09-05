@@ -9,8 +9,8 @@ For an example use the index.html and the .js folder.
 <head>
 ...
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-  <script type="text/javascript" src="js/GunRecorder.js"></script>
-  <script type="text/javascript" src="js/GunStreamer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/GunRecorder.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/GunStreamer.js"></script>
  ... 
 </head>
 ```
@@ -22,13 +22,14 @@ For an example use the index.html and the .js folder.
   <button id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
   <br><br>
   <video id="record_video" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay controls muted />
-  <script type="text/javascript" src="js/initialiation.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/integration.js"></script><!-- Default integration -->
  ...
 </body>
 ```
 
-### initialiation.js
-The gun part, writing to gun and publish it.
+### initialiation.js 
+In case you are not using the default integration. You can create own initialiation.js The gun part, writing to gun and publish it.
+Just make sure to refer it at the end of the body as a script.
 ```javascript
 //Configure GUN to pass to streamer
 var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
