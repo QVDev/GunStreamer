@@ -2,15 +2,17 @@
 Streaming components for Gun db. [See here for a working example](https://qvdev.github.io/GunStreamer)
 
 # Integration
-For an example use the index.html and the .js folder. 
+For an example use the index.html and the .js folder. If you use the cdn method as shown below do not forget to add the parse_worker.js file manually.
 
 ### HTML
 ```html
 <head>
 ...
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/GunRecorder.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/GunStreamer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunRecorder.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunStreamer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
  ... 
 </head>
 ```
@@ -23,7 +25,7 @@ For an example use the index.html and the .js folder.
   <br><br>
   <video id="record_video" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay controls muted /><!-- Streamer -->
   <video id="qvdev" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay muted/><!-- Viewer id is equal to streamId -->
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/integration.js"></script><!-- Default integration -->
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/integration.js"></script><!-- Default integration -->
  ...
 </body>
 ```
