@@ -5,7 +5,6 @@ var recordSate = {
   UNKNOWN: 4,
 };
 
-const MIMETYPE = 'video/webm; codecs="opus,vp8"';
 const RECORDER_TIME_SLICE = 300;
 const CAMERA_OPTIONS = { video: true, audio: true }
 
@@ -16,7 +15,7 @@ class GunRecorder {
     this.onDataAvailable = config.onDataAvailable;
     this.onRecordStateChange = config.onRecordStateChange
     this.recorderOptions = {
-      mimeType: MIMETYPE,
+      mimeType: config.mimeType,
       audioBitsPerSecond: config.audioBitsPerSecond,
       videoBitsPerSecond: config.videoBitsPerSecond
     }

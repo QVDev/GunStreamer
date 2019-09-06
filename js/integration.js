@@ -1,14 +1,32 @@
+const MIMETYPE = 'video/webm; codecs="opus,vp8"';
+
+//Configure GunViewer 
+var config = {
+  mimeType: MIMETYPE,
+  streamerId: "qvdev",//ID of the streamer
+  debug: false,//For debug logs
+}
+
+var gunViewer = new GunViewer(config);
+
 //Configure GUN to pass to streamer
 var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
 var opt = { peers: peers, localStorage: false, radisk: false };
-var gunDB = Gun(opt);
+// var gunDB = Gun(opt);
+
+//Get data from gun and pass along to viewer
+// gunDB.get("qvdev").on(function (data) {
+//   gunViewer.onStreamerData(data);
+// });
+
 
 //Config for the GUN GunStreamer
 var streamer_config = {
   dbRecord: "gunmeeting",//The root of the streams
   streamId: "qvdev",//The user id you wanna stream
-  gun: gunDB,//Gun instance
-  debug: false//For debug logs
+  // gun: gunDB,//Gun instance
+  debug: false,//For debug logs
+  onStreamerData: gunViewer.onStreamerData//If you want manually handle the data manually
 }
 
 //GUN Streamer is the data side. It will convert data and write to GUN db
@@ -33,6 +51,7 @@ var onRecordStateChange = function (state) {
 
 //Config for the gun recorder
 var recorder_config = {
+  mimeType: MIMETYPE,
   video_id: "record_video",//Video html element id
   onDataAvailable: gunStreamer.onDataAvailable,//MediaRecorder data available callback
   onRecordStateChange: onRecordStateChange,//Callback for recording state

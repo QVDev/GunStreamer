@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/GunRecorder.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/GunStreamer.js"></script>
+</head>
+
+<body style="background-color:#ebebeb">
+
+  <div class="container">
+    <video id="record_video" data-role="video" data-src="https://metroui.org.ua/res/oceans.mp4"
+      data-logo="https://i.imgur.com/Nb8upGp.gif" data-logo-height="64" data-logo-target="https://metroui.org.ua/v4/"
+      data-controls-hide="1000"></video>
+
+    <button type="button" class="button secondary" onclick="gunRecorder.startCamera()">Start Camera</button>
+    <button id="record_button" class="button alert" type="button" onclick="gunRecorder.record()">Start
+      Recording</button>
+
+    <a href="https://gunmeeting.herokuapp.com" target="_blank">
+      <button type="button" class="button success">Visit Viewer as other see it</button>
+    </a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/integration.js"></script>
+</body>
+
+</html>
