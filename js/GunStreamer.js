@@ -24,7 +24,7 @@ class GunStreamer {
       });
       response = null;
     } else {
-      this.debugLog("data not available")
+      gunStreamer.debugLog("data not available")
     }
   }
 
@@ -38,7 +38,7 @@ class GunStreamer {
         this.writeToGun(message);
       };
     } else {
-      LOG("Sorry! No Web Worker support.");
+      gunStreamer.debugLog("Sorry! No Web Worker support.");
     }
   }
 

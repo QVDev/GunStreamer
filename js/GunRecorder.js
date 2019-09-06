@@ -5,8 +5,12 @@ var recordSate = {
   UNKNOWN: 4,
 };
 
-const RECORDER_TIME_SLICE = 300;
-const CAMERA_OPTIONS = { video: true, audio: true }
+const RECORDER_TIME_SLICE = 150;
+const CAMERA_OPTIONS = {
+  video: {
+    frameRate: 24
+  }, audio: false
+}
 
 class GunRecorder {
   constructor(config) {
@@ -19,6 +23,7 @@ class GunRecorder {
       audioBitsPerSecond: config.audioBitsPerSecond,
       videoBitsPerSecond: config.videoBitsPerSecond
     }
+    this.experimental = config.experimental;
     this.debug = config.debug;
     this.setRecordingState(recordSate.UNKNOWN);
   }
@@ -26,14 +31,29 @@ class GunRecorder {
   record() {
     if (this.recordSate == recordSate.RECORDING) {
       this.mediaRecorder.stop();
+      clearInterval(this.experimentalTimerId);
       this.changeRecordState();
     } else if (this.recordSate == recordSate.STOPPED) {
       this.mediaRecorder = new MediaRecorder(gunRecorder.video.captureStream(), this.recorderOptions);
       this.mediaRecorder.ondataavailable = gunRecorder.onDataAvailable;
-      this.mediaRecorder.start(RECORDER_TIME_SLICE);
+      if (this.experimental) {
+        this.experimentalTimerId = setInterval(this.experimentalTimer, RECORDER_TIME_SLICE);
+        this.mediaRecorder.start();
+      } else {
+        this.mediaRecorder.start(RECORDER_TIME_SLICE);
+      }
       this.changeRecordState();
     } else {
       this.debugLog("The camera has not been initialized yet. First call startCamera()")
+    }
+  }
+
+  //This will use a custom timer to make intervals witb start and stop recorder decrease latency test
+  experimentalTimer() {
+    if (gunRecorder.experimental) {
+      // mediaRecorder.requestData() can we parse this manually?
+      gunRecorder.mediaRecorder.stop()
+      gunRecorder.mediaRecorder.start();
     }
   }
 

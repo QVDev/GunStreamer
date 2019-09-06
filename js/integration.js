@@ -1,13 +1,14 @@
-const MIMETYPE = 'video/webm; codecs="opus,vp8"';
+const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
+const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
 
 //Configure GunViewer 
-var config = {
-  mimeType: MIMETYPE,
+var viewer_config = {
+  mimeType: MIMETYPE_VIDEO_ONLY,
   streamerId: "qvdev",//ID of the streamer
-  debug: false,//For debug logs
+  debug: false,//For debug logs  
 }
 
-var gunViewer = new GunViewer(config);
+var gunViewer = new GunViewer(viewer_config);
 
 //Configure GUN to pass to streamer
 var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
@@ -51,12 +52,13 @@ var onRecordStateChange = function (state) {
 
 //Config for the gun recorder
 var recorder_config = {
-  mimeType: MIMETYPE,
+  mimeType: MIMETYPE_VIDEO_ONLY,
   video_id: "record_video",//Video html element id
   onDataAvailable: gunStreamer.onDataAvailable,//MediaRecorder data available callback
   onRecordStateChange: onRecordStateChange,//Callback for recording state
   audioBitsPerSecond: 6000,//Audio bits per second this is the lowest quality
   videoBitsPerSecond: 100000,//Video bits per second this is the lowest quality
+  experimental: true,//This is custom time interval and very unstable with audio. Only video is more stable is interval quick enough? Audio
   debug: false//For debug logs
 }
 

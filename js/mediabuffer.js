@@ -26,11 +26,14 @@ function Mediabuffer(element, progressCallback, readyCallback, disableMobileChec
 	this.loadStartTime = 0;
 	this.percentBuffered = 0;
 	this.previousPercentBuffered = 0;
-	this.delays = [6];
+	this.delays = [0];
 }
 
 Mediabuffer.prototype.addDelay = function (delay) {
 	this.delays.push(delay);
+	if (this.delays.length > 300) {
+		this.delays = [this.getAverageDelay()];
+	}
 }
 
 Mediabuffer.prototype.getAverageDelay = function () {
