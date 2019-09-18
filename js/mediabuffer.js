@@ -47,17 +47,17 @@ Mediabuffer.prototype.getAverageDelay = function () {
 }
 
 Mediabuffer.prototype.load = function () {
-	if (!this.disableMobileCheck && this.isMobileBrowser()) {
-		// mobile browser, so fail gracefully
-		this.readyCallback();
-	} else {
-		this.element.preload = "auto";
-		this.element.load();
+	// if (!this.disableMobileCheck && this.isMobileBrowser()) {
+	// 	// mobile browser, so fail gracefully
+	// 	this.readyCallback();
+	// } else {
+	this.element.preload = "auto";
+	this.element.load();
 
-		this.boundProgress = this.progress.bind(this);
+	this.boundProgress = this.progress.bind(this);
 
-		this.element.addEventListener('progress', this.boundProgress, true);
-	}
+	this.element.addEventListener('progress', this.boundProgress, true);
+	// }
 };
 
 Mediabuffer.prototype.progress = function () {
