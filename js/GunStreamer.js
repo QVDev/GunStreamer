@@ -10,7 +10,7 @@ class GunStreamer {
     this.gunDB = config.gun;
     this.debug = config.debug;
     this.onStreamerData = config.onStreamerData
-    this.startWorker();
+    this.startWorker(config.url);
   }
 
   onDataAvailable(event) {
@@ -28,18 +28,39 @@ class GunStreamer {
     }
   }
 
-  startWorker() {
+  startWorker(url) {
+    var gunwriter = this;
     if (typeof (Worker) !== "undefined") {
       if (typeof (parseWorker) == "undefined") {
-        parseWorker = new Worker("js/parser_worker.js");
+        this.getRemoteWorker(url, function (worker) {
+          parseWorker = worker;
+          parseWorker.onmessage = e => {
+            const message = e.data;
+            gunwriter.writeToGun(message);
+          };
+        });
       }
-      parseWorker.onmessage = e => {
-        const message = e.data;
-        this.writeToGun(message);
-      };
+
     } else {
       gunStreamer.debugLog("Sorry! No Web Worker support.");
     }
+  }
+
+  getRemoteWorker(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        var workerSrcBlob, workerBlobURL;
+
+        workerSrcBlob = new Blob([xhr.responseText], { type: 'text/javascript' });
+        workerBlobURL = window.URL.createObjectURL(workerSrcBlob);
+
+        var worker = new Worker(workerBlobURL);
+        callback(worker);
+      }
+    };
+    xhr.send();
   }
 
   stopWorker() {
