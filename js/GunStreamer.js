@@ -47,20 +47,19 @@ class GunStreamer {
   }
 
   getRemoteWorker(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.onload = function () {
-      if (xhr.status === 200) {
+    fetch(url)
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (js) {
         var workerSrcBlob, workerBlobURL;
 
-        workerSrcBlob = new Blob([xhr.responseText], { type: 'text/javascript' });
+        workerSrcBlob = new Blob([js], { type: 'text/javascript' });
         workerBlobURL = window.URL.createObjectURL(workerSrcBlob);
 
         var worker = new Worker(workerBlobURL);
         callback(worker);
-      }
-    };
-    xhr.send();
+      });
   }
 
   stopWorker() {
