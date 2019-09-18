@@ -13,12 +13,12 @@ var gunViewer = new GunViewer(viewer_config);
 //Configure GUN to pass to streamer
 var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
 var opt = { peers: peers, localStorage: false, radisk: false };
-// var gunDB = Gun(opt);
+var gunDB = Gun(opt);
 
-//Get data from gun and pass along to viewer
-// gunDB.get("qvdev").on(function (data) {
-//   gunViewer.onStreamerData(data);
-// });
+// Get data from gun and pass along to viewer
+gunDB.get("qvdev").on(function (data) {
+  gunViewer.onStreamerData(data);
+});
 
 
 //Config for the GUN GunStreamer
@@ -27,8 +27,8 @@ var streamer_config = {
   streamId: "qvdev",//The user id you wanna stream
   // gun: gunDB,//Gun instance
   debug: false,//For debug logs
-  onStreamerData: gunViewer.onStreamerData,//If you want manually handle the data manually
-  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.2/js/parser_worker.js"//webworker load remote
+  // onStreamerData: gunViewer.onStreamerData,//If you want manually handle the data manually
+  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.4/js/parser_worker.js"//webworker load remote
 }
 
 //GUN Streamer is the data side. It will convert data and write to GUN db

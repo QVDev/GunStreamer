@@ -4,10 +4,11 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <script src="js/GunRecorder.js"></script>
-  <script src="js/GunStreamer.js"></script>
-  <script src="js/GunViewer.js"></script>
-  <script src="js/mediabuffer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.4/js/GunRecorder.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.4/js/GunStreamer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.4/js/GunViewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.4/js/mediabuffer.js"></script>
 </head>
 
 <body>
@@ -15,11 +16,11 @@
   <button id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
   <br><br>
   Streamer<br>
-  <video id="record_video" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay muted></video>
+  <video id="record_video" width="20%" autoplay muted></video>
   <br>
   <br>
   Viewer<br>
-  <video id="qvdev" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay muted></video>
+  <video id="qvdev" width="20%" autoplay muted></video>
   <script src="js/integration.js"></script>
 </body>
 
