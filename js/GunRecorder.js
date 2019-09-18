@@ -8,6 +8,7 @@ var recordSate = {
 const RECORDER_TIME_SLICE = 150;
 const CAMERA_OPTIONS = {
   video: {
+    facingMode: "environment",
     frameRate: 24
   }, audio: false
 }
