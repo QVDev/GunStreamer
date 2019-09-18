@@ -25,10 +25,10 @@ gunDB.get("qvdev").on(function (data) {
 var streamer_config = {
   dbRecord: "gunmeeting",//The root of the streams
   streamId: "qvdev",//The user id you wanna stream
-  // gun: gunDB,//Gun instance
+  gun: gunDB,//Gun instance
   debug: false,//For debug logs
   // onStreamerData: gunViewer.onStreamerData,//If you want manually handle the data manually
-  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.4/js/parser_worker.js"//webworker load remote
+  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.5/js/parser_worker.js"//webworker load remote
 }
 
 //GUN Streamer is the data side. It will convert data and write to GUN db
