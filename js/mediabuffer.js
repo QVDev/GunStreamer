@@ -16,12 +16,13 @@
  *  based on http://detectmobilebrowsers.com/ by Chad Smith
  */
 
-function Mediabuffer(element, progressCallback, readyCallback, disableMobileCheck, forceFullDownload) {
+function Mediabuffer(element, progressCallback, readyCallback, disableMobileCheck, forceFullDownload, catchup) {
 	this.element = element;
 	this.progressCallback = progressCallback;
 	this.readyCallback = readyCallback;
 	this.disableMobileCheck = typeof disableMobileCheck !== 'undefined' ? disableMobileCheck : false;
 	this.forceFullDownload = typeof forceFullDownload !== 'undefined' ? forceFullDownload : false;
+	this.catchup = typeof catchup !== 'undefined' ? catchup : true;
 
 	this.loadStartTime = 0;
 	this.percentBuffered = 0;
@@ -47,17 +48,17 @@ Mediabuffer.prototype.getAverageDelay = function () {
 }
 
 Mediabuffer.prototype.load = function () {
-	// if (!this.disableMobileCheck && this.isMobileBrowser()) {
-	// 	// mobile browser, so fail gracefully
-	// 	this.readyCallback();
-	// } else {
-	this.element.preload = "auto";
-	this.element.load();
+	if (!this.disableMobileCheck && this.isMobileBrowser()) {
+		// mobile browser, so fail gracefully
+		this.readyCallback();
+	} else {
+		this.element.preload = "auto";
+		this.element.load();
 
-	this.boundProgress = this.progress.bind(this);
+		this.boundProgress = this.progress.bind(this);
 
-	this.element.addEventListener('progress', this.boundProgress, true);
-	// }
+		this.element.addEventListener('progress', this.boundProgress, true);
+	}
 };
 
 Mediabuffer.prototype.progress = function () {
@@ -100,9 +101,11 @@ Mediabuffer.prototype.chromeBugWorkaround = function () {
 
 	}
 
-	let reduceDelay = (this.element.buffered.end(0) - this.getAverageDelay())
-	if (reduceDelay > this.element.currentTime) {
-		this.element.currentTime = reduceDelay;
+	if (this.catchup) {
+		let reduceDelay = (this.element.buffered.end(0) - this.getAverageDelay())
+		if (reduceDelay > this.element.currentTime) {
+			this.element.currentTime = reduceDelay;
+		}
 	}
 };
 

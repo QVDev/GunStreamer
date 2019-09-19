@@ -3,7 +3,7 @@ class GunViewer {
     constructor(config) {
         this.mimeType = config.mimeType;
         this.video = document.getElementById(config.streamerId);
-        this.mediaBuffer = new Mediabuffer(this.video, null, null);
+        this.mediaBuffer = new Mediabuffer(this.video, null, null, true, null, config.catchup);
         this.mediaSource = new MediaSource();
         this.debug = config.debug;
         this.lastTime = 0;

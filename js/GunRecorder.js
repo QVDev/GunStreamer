@@ -5,14 +5,6 @@ var recordSate = {
   UNKNOWN: 4,
 };
 
-const RECORDER_TIME_SLICE = 150;
-const CAMERA_OPTIONS = {
-  video: {
-    facingMode: "environment",
-    frameRate: 24
-  }, audio: false
-}
-
 class GunRecorder {
   constructor(config) {
     this.video = document.getElementById(config.video_id);
@@ -24,6 +16,8 @@ class GunRecorder {
       audioBitsPerSecond: config.audioBitsPerSecond,
       videoBitsPerSecond: config.videoBitsPerSecond
     }
+    this.recordInterval = config.recordInterval
+    this.cameraOptions = config.cameraOptions
     this.experimental = config.experimental;
     this.debug = config.debug;
     this.setRecordingState(recordSate.UNKNOWN);
@@ -38,10 +32,10 @@ class GunRecorder {
       this.mediaRecorder = new MediaRecorder(gunRecorder.video.captureStream(), this.recorderOptions);
       this.mediaRecorder.ondataavailable = gunRecorder.onDataAvailable;
       if (this.experimental) {
-        this.experimentalTimerId = setInterval(this.experimentalTimer, RECORDER_TIME_SLICE);
+        this.experimentalTimerId = setInterval(this.experimentalTimer, this.recordInterval);
         this.mediaRecorder.start();
       } else {
-        this.mediaRecorder.start(RECORDER_TIME_SLICE);
+        this.mediaRecorder.start(this.recordInterval);
       }
       this.changeRecordState();
     } else {
@@ -65,7 +59,24 @@ class GunRecorder {
     }
     var gunRecorder = this;
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia(CAMERA_OPTIONS).then(function (stream) {
+      navigator.mediaDevices.getUserMedia(this.cameraOptions).then(function (stream) {
+        gunRecorder.video.srcObject = stream;
+        gunRecorder.video.play();
+      });
+      this.setRecordingState(recordSate.STOPPED);
+    } else {
+      this.setRecordingState(recordSate.NOT_AVAILABLE);
+    }
+  }
+
+  startScreenCapture() {
+    if (this.recordSate == recordSate.RECORDING || this.recordSate == recordSate.STOPPED) {
+      this.debugLog("ScreenCast already started no need to do again");
+      return;
+    }
+    var gunRecorder = this;
+    if (navigator.mediaDevices.getDisplayMedia && navigator.mediaDevices.getDisplayMedia) {
+      navigator.mediaDevices.getDisplayMedia(this.cameraOptions).then(function (stream) {
         gunRecorder.video.srcObject = stream;
         gunRecorder.video.play();
       });
