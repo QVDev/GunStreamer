@@ -76,9 +76,13 @@ class GunRecorder {
     }
     var gunRecorder = this;
     if (navigator.mediaDevices.getDisplayMedia && navigator.mediaDevices.getDisplayMedia) {
-      navigator.mediaDevices.getDisplayMedia(this.cameraOptions).then(function (stream) {
-        gunRecorder.video.srcObject = stream;
-        gunRecorder.video.play();
+      navigator.mediaDevices.getDisplayMedia(this.cameraOptions).then(function (desktopStream) {
+        navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(function (voiceStream) {
+          let tracks = [desktopStream.getVideoTracks()[0], voiceStream.getAudioTracks()[0]]
+          var stream = new MediaStream(tracks);
+          gunRecorder.video.srcObject = stream;
+          gunRecorder.video.play();
+        });
       });
       this.setRecordingState(recordSate.STOPPED);
     } else {
