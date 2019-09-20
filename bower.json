@@ -1,0 +1,13 @@
+{
+  "name": "gunstreamer",
+  "description": "Streaming component for GunDB",
+  "main": "js/GunViewer.js",
+  "authors": [
+    "QVDev"
+  ],
+  "license": "GPL v3",
+  "homepage": "https://github.com/QVDev/GunStreamer",
+  "ignore": [
+    "**/.*"
+  ]
+}

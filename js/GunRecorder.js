@@ -1,4 +1,4 @@
-var recordSate = {
+var recordState = {
   STOPPED: 1,
   RECORDING: 2,
   NOT_AVAILABLE: 3,
@@ -20,15 +20,15 @@ class GunRecorder {
     this.cameraOptions = config.cameraOptions
     this.experimental = config.experimental;
     this.debug = config.debug;
-    this.setRecordingState(recordSate.UNKNOWN);
+    this.setRecordingState(recordState.UNKNOWN);
   }
 
   record() {
-    if (this.recordSate == recordSate.RECORDING) {
+    if (this.recordState == recordState.RECORDING) {
       this.mediaRecorder.stop();
       clearInterval(this.experimentalTimerId);
       this.changeRecordState();
-    } else if (this.recordSate == recordSate.STOPPED) {
+    } else if (this.recordState == recordState.STOPPED) {
       this.mediaRecorder = new MediaRecorder(gunRecorder.video.captureStream(), this.recorderOptions);
       this.mediaRecorder.ondataavailable = gunRecorder.onDataAvailable;
       if (this.experimental) {
@@ -53,7 +53,7 @@ class GunRecorder {
   }
 
   startCamera() {
-    if (this.recordSate == recordSate.RECORDING || this.recordSate == recordSate.STOPPED) {
+    if (this.recordState == recordState.RECORDING || this.recordState == recordState.STOPPED) {
       this.debugLog("Camera already started no need to do again");
       return;
     }
@@ -63,14 +63,14 @@ class GunRecorder {
         gunRecorder.video.srcObject = stream;
         gunRecorder.video.play();
       });
-      this.setRecordingState(recordSate.STOPPED);
+      this.setRecordingState(recordState.STOPPED);
     } else {
-      this.setRecordingState(recordSate.NOT_AVAILABLE);
+      this.setRecordingState(recordState.NOT_AVAILABLE);
     }
   }
 
   startScreenCapture() {
-    if (this.recordSate == recordSate.RECORDING || this.recordSate == recordSate.STOPPED) {
+    if (this.recordState == recordState.RECORDING || this.recordState == recordState.STOPPED) {
       this.debugLog("ScreenCast already started no need to do again");
       return;
     }
@@ -84,34 +84,34 @@ class GunRecorder {
           gunRecorder.video.play();
         });
       });
-      this.setRecordingState(recordSate.STOPPED);
+      this.setRecordingState(recordState.STOPPED);
     } else {
-      this.setRecordingState(recordSate.NOT_AVAILABLE);
+      this.setRecordingState(recordState.NOT_AVAILABLE);
     }
   }
 
   changeRecordState() {
-    switch (this.recordSate) {
-      case recordSate.STOPPED:
-        this.setRecordingState(recordSate.RECORDING);
+    switch (this.recordState) {
+      case recordState.STOPPED:
+        this.setRecordingState(recordState.RECORDING);
         break;
-      case recordSate.NOT_AVAILABLE:
+      case recordState.NOT_AVAILABLE:
         this.debugLog("Sorry camera not available")
         break;
-      case recordSate.UNKNOWN:
+      case recordState.UNKNOWN:
         this.debugLog("State is unknown check if camera is intialized")
         break;
       default:
-        this.setRecordingState(recordSate.STOPPED);
+        this.setRecordingState(recordState.STOPPED);
         break;
     }
   }
 
-  setRecordingState(recordSate) {
-    this.debugLog("STATE BEFORE::" + this.recordSate);
-    this.recordSate = recordSate;
-    this.onRecordStateChange(this.recordSate);
-    this.debugLog("STATE AFTER::" + this.recordSate);
+  setRecordingState(recordState) {
+    this.debugLog("STATE BEFORE::" + this.recordState);
+    this.recordState = recordState;
+    this.onRecordStateChange(this.recordState);
+    this.debugLog("STATE AFTER::" + this.recordState);
   }
 
   debugLog(logData) {

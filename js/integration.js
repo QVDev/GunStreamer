@@ -58,7 +58,7 @@ const gunStreamer = new GunStreamer(streamer_config)
 var onRecordStateChange = function (state) {
   var recordButton = document.getElementById("record_button");
   switch (state) {
-    case recordSate.RECORDING:
+    case recordState.RECORDING:
       recordButton.innerText = "Stop recording";
       break;
     default:
