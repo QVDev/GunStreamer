@@ -12,7 +12,7 @@ For an example use the index.html and the .js folder. If you use the cdn method 
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunRecorder.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunStreamer.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/mediabuffer.js"></script>
  ... 
 </head>
 ```
