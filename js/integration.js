@@ -44,7 +44,7 @@ var streamer_config = {
   gun: gunDB,//Gun instance
   debug: false,//For debug logs
   onStreamerData: gunViewer.onStreamerData,//If you want manually handle the data manually
-  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.6/js/parser_worker.js"//webworker load remote
+  url: "./parser_worker.js"
 }
 
 //GUN Streamer is the data side. It will convert data and write to GUN db
