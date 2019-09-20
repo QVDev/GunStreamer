@@ -29,8 +29,8 @@ class GunRecorder {
       clearInterval(this.experimentalTimerId);
       this.changeRecordState();
     } else if (this.recordState == recordState.STOPPED) {
-      this.mediaRecorder = new MediaRecorder(gunRecorder.video.captureStream(), this.recorderOptions);
-      this.mediaRecorder.ondataavailable = gunRecorder.onDataAvailable;
+      this.mediaRecorder = new MediaRecorder(this.video.captureStream(), this.recorderOptions);
+      this.mediaRecorder.ondataavailable = this.onDataAvailable;
       if (this.experimental) {
         this.experimentalTimerId = setInterval(this.experimentalTimer, this.recordInterval);
         this.mediaRecorder.start();
@@ -45,10 +45,10 @@ class GunRecorder {
 
   //This will use a custom timer to make intervals witb start and stop recorder decrease latency test
   experimentalTimer() {
-    if (gunRecorder.experimental) {
+    if (this.experimental) {
       // mediaRecorder.requestData() can we parse this manually?
-      gunRecorder.mediaRecorder.stop()
-      gunRecorder.mediaRecorder.start();
+      this.mediaRecorder.stop()
+      this.mediaRecorder.start();
     }
   }
 
@@ -57,11 +57,10 @@ class GunRecorder {
       this.debugLog("Camera already started no need to do again");
       return;
     }
-    var gunRecorder = this;
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia(this.cameraOptions).then(function (stream) {
-        gunRecorder.video.srcObject = stream;
-        gunRecorder.video.play();
+      navigator.mediaDevices.getUserMedia(this.cameraOptions).then(stream => {
+        this.video.srcObject = stream;
+        this.video.play();
       });
       this.setRecordingState(recordState.STOPPED);
     } else {
@@ -74,14 +73,13 @@ class GunRecorder {
       this.debugLog("ScreenCast already started no need to do again");
       return;
     }
-    var gunRecorder = this;
     if (navigator.mediaDevices.getDisplayMedia && navigator.mediaDevices.getDisplayMedia) {
-      navigator.mediaDevices.getDisplayMedia(this.cameraOptions).then(function (desktopStream) {
-        navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(function (voiceStream) {
+      navigator.mediaDevices.getDisplayMedia(this.cameraOptions).then(desktopStream => {
+        navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(voiceStream => {
           let tracks = [desktopStream.getVideoTracks()[0], voiceStream.getAudioTracks()[0]]
           var stream = new MediaStream(tracks);
-          gunRecorder.video.srcObject = stream;
-          gunRecorder.video.play();
+          this.video.srcObject = stream;
+          this.video.play();
         });
       });
       this.setRecordingState(recordState.STOPPED);
