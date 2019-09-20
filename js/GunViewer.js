@@ -14,9 +14,10 @@ class GunViewer {
         if (this.video !== null) {
             this.mediaBuffer.load();
             this.video.src = window.URL.createObjectURL(this.mediaSource);
-            this.mediaSource.addEventListener('sourceopen', () => {
-                this.sourceBuffer = this.addSourceBuffer(this.mimeType);
-                this.sourceBuffer.mode = 'sequence';
+            this.mediaSource.addEventListener('sourceopen', (event) => {
+                const mediaSource = event.target;
+                mediaSource.sourceBuffer = mediaSource.addSourceBuffer(this.mimeType);
+                mediaSource.sourceBuffer.mode = 'sequence';
                 // Get video segments and append them to sourceBuffer.
                 this.debugLog("Source is open and ready to append to sourcebuffer");
             });
