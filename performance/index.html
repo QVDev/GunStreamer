@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.8/js/GunRecorder.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.8/js/GunStreamer.js"></script>
+</head>
+
+<body>
+  <label for="host">Interval in ms (60sec -> +-18MB</label>
+  <input type="number" id="interval" name="interval" value="1000">
+  <br>
+  <button type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+  <button type="button" onclick="gunRecorder.startScreenCapture()">Start ScreenCapture</button>
+  <button id="record_button" type="button" onclick="setIntervalAndRecord()">Start Recording</button>
+  <input type="checkbox" id="doWrite" name="doWrite">
+  <label for="doWrite">Write to gun?</label>
+  <br><br>
+  Streamer<br>
+  <video id="record_video" width="20%" autoplay muted></video>
+  <script src="js/integration_performance.js"></script>
+</body>
+
+</html>
