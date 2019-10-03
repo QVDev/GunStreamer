@@ -1,5 +1,6 @@
 # GunStreamer
 Streaming components for Gun db. [See here for a working example](https://qvdev.github.io/GunStreamer)
+Performance for Gun db. [See here performance test example](https://qvdev.github.io/GunStreamer/performance)
 
 # Integration
 For an example use the index.html and the .js folder. If you use the cdn method as shown below do not forget to add the parse_worker.js file manually.
