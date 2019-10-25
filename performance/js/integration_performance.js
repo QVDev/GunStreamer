@@ -28,7 +28,7 @@ var streamer_config = {
   streamId: STREAM_ID,//The user id you wanna stream  
   gun: gunDB,//Gun instance
   debug: false,//For debug logs
-  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.6/js/parser_worker.js"//webworker load remote
+  url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/parser_worker.js"//webworker load remote
 }
 
 //GUN Streamer is the data side. It will convert data and write to GUN db

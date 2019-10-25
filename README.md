@@ -11,10 +11,10 @@ For an example use the index.html and the .js folder. If you use the cdn method 
 <head>
 ...
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunRecorder.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunStreamer.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/mediabuffer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunRecorder.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunViewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/mediabuffer.js"></script>
  ... 
 </head>
 ```
@@ -27,7 +27,7 @@ For an example use the index.html and the .js folder. If you use the cdn method 
   <br><br>
   <video id="record_video" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay controls muted /><!-- Streamer -->
   <video id="qvdev" width="20%" poster="https://www.srsd.net/images/video-poster.png" autoplay muted/><!-- Viewer id is equal to streamId -->
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/integration.js"></script><!-- Default integration -->
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/integration.js"></script><!-- Default integration -->
  ...
 </body>
 ```
