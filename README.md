@@ -14,7 +14,7 @@ For an example use the index.html and the .js folder. If you use the cdn method 
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunRecorder.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunStreamer.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/GunViewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.3/js/mediabuffer.js"></script>
  ... 
 </head>
 ```
@@ -85,7 +85,7 @@ const gunStreamer = new GunStreamer(streamer_config)
 var onRecordStateChange = function (state) {
   var recordButton = document.getElementById("record_button");
   switch (state) {
-    case recordSate.RECORDING:
+    case recordState.RECORDING:
       recordButton.innerText = "Stop recording";
       break;
     default:

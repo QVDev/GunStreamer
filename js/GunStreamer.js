@@ -29,14 +29,13 @@ class GunStreamer {
   }
 
   startWorker(url) {
-    var gunwriter = this;
     if (typeof (Worker) !== "undefined") {
       if (typeof (parseWorker) == "undefined") {
-        this.getRemoteWorker(url, function (worker) {
+        this.getRemoteWorker(url, worker => {
           parseWorker = worker;
           parseWorker.onmessage = e => {
             const message = e.data;
-            gunwriter.writeToGun(message);
+            this.writeToGun(message);
           };
         });
       }
@@ -80,10 +79,10 @@ class GunStreamer {
       var n = base64data.indexOf("H0O2dQH");
       this.debugLog("RAW::" + n + "::" + base64data);
     }
-    if (this.gunDB !== null && this.gunDB !== undefined) {
+    if (this.gunDB) {
       //Probably has to be changed to different data structure
-      user = gunDB.get(this.streamId).put({ initial: initialData, data: base64data, id: this.streamId, timestamp: lastUpdate, isSpeaking: false });
-      gunDB.get(this.dbRecord).set(user);
+      user = this.gunDB.get(this.streamId).put({ initial: initialData, data: base64data, id: this.streamId, timestamp: lastUpdate, isSpeaking: false });
+      this.gunDB.get(this.dbRecord).set(user);
     } else if (this.onStreamerData !== null && this.onStreamerData !== undefined) {
       this.onStreamerData({ initial: initialData, data: base64data, id: this.streamId, timestamp: lastUpdate, isSpeaking: false });
     }
